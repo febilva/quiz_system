@@ -16,13 +16,13 @@
       <td><%= option.is_asnwer %></td>
 
       <td>
-        <%= link "Show", to: Routes.option_path(@conn, :show, option) %>
-        <%= link "Edit", to: Routes.option_path(@conn, :edit, option) %>
-        <%= link "Delete", to: Routes.option_path(@conn, :delete, option), method: :delete, data: [confirm: "Are you sure?"] %>
+        <%= link "Show", to: Routes.question_option_path(@conn, :show,@question_id, option) %>
+        <%= link "Edit", to: Routes.question_option_path(@conn, :edit,@question_id, option) %>
+        <%= link "Delete", to: Routes.question_option_path(@conn, :delete,@question_id, option), method: :delete, data: [confirm: "Are you sure?"] %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Option", to: Routes.option_path(@conn, :new) %></span>
+<span><%= link "New Option", to: Routes.question_option_path(@conn, :new,@question_id) %></span>
