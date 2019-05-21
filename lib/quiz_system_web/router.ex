@@ -17,8 +17,10 @@ defmodule QuizSystemWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    resources "/questions", QuestionController
-    resources "/options", OptionController
+
+    resources "/questions", QuestionController do
+      resources "/options", OptionController
+    end
   end
 
   # Other scopes may use custom stacks.
