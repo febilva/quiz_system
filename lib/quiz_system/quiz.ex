@@ -145,8 +145,11 @@ defmodule QuizSystem.Quiz do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_option(attrs \\ %{}) do
-    %Option{}
+  def create_option(attrs \\ %{}, question_id) do
+    # %Option{}
+    question_id
+    |> get_question!()
+    |> Ecto.build_assoc(:options)
     |> Option.changeset(attrs)
     |> Repo.insert()
   end
