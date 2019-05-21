@@ -5,7 +5,7 @@ defmodule QuizSystemWeb.OptionController do
   alias QuizSystem.Quiz.Option
 
   def index(conn, %{"question_id" => question_id}) do
-    options = Quiz.list_options()
+    options = Quiz.list_options(question_id)
     render(conn, "index.html", options: options, question_id: question_id)
   end
 

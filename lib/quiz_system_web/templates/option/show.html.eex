@@ -15,4 +15,4 @@
 </ul>
 
 <span><%= link "Edit", to: Routes.question_option_path(@conn, :edit,@question_id, @option) %></span>
-<span><%#= link "Back", to: Routes.question_option_path(@conn, :index,@question_id) %></span>
+<span><%= link "Back", to: Routes.question_option_path(@conn, :index,@question_id) %></span>

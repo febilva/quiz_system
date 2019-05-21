@@ -113,8 +113,8 @@ defmodule QuizSystem.Quiz do
       [%Option{}, ...]
 
   """
-  def list_options do
-    Repo.all(Option)
+  def list_options(question_id) do
+    Repo.all(from option in Option, where: option.question_id == ^question_id)
   end
 
   @doc """
