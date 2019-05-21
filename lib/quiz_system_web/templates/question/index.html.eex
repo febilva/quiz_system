@@ -1,0 +1,26 @@
+<h1>Listing Questions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Question</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for question <- @questions do %>
+    <tr>
+      <td><%= question.question %></td>
+
+      <td>
+        <%= link "Show", to: Routes.question_path(@conn, :show, question) %>
+        <%= link "Edit", to: Routes.question_path(@conn, :edit, question) %>
+        <%= link "Delete", to: Routes.question_path(@conn, :delete, question), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Question", to: Routes.question_path(@conn, :new) %></span>
