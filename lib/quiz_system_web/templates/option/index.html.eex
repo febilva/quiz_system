@@ -1,0 +1,28 @@
+<h1>Listing Options</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Is asnwer</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for option <- @options do %>
+    <tr>
+      <td><%= option.option %></td>
+      <td><%= option.is_asnwer %></td>
+
+      <td>
+        <%= link "Show", to: Routes.option_path(@conn, :show, option) %>
+        <%= link "Edit", to: Routes.option_path(@conn, :edit, option) %>
+        <%= link "Delete", to: Routes.option_path(@conn, :delete, option), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Option", to: Routes.option_path(@conn, :new) %></span>

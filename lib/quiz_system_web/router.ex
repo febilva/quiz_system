@@ -18,6 +18,7 @@ defmodule QuizSystemWeb.Router do
 
     get "/", PageController, :index
     resources "/questions", QuestionController
+    resources "/options", OptionController
   end
 
   # Other scopes may use custom stacks.

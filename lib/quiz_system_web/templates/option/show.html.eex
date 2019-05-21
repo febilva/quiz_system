@@ -1,0 +1,18 @@
+<h1>Show Option</h1>
+
+<ul>
+
+  <li>
+    <strong>Option:</strong>
+    <%= @option.option %>
+  </li>
+
+  <li>
+    <strong>Is asnwer:</strong>
+    <%= @option.is_asnwer %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.option_path(@conn, :edit, @option) %></span>
+<span><%= link "Back", to: Routes.option_path(@conn, :index) %></span>
