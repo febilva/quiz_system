@@ -7,6 +7,7 @@
     <%= @question.question %>
   </li>
     <%= link "Show Options", to: Routes.question_option_path(@conn, :index,@question.id) %>
+    <br>
     <%= link "Create Options", to: Routes.question_option_path(@conn, :new,@question.id) %>
   <span>
   
