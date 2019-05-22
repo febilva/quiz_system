@@ -27,7 +27,7 @@ defmodule QuizSystemWeb.OptionController do
         |> redirect(to: Routes.question_option_path(conn, :show, question_id, option))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, question_id: question_id)
     end
   end
 
@@ -52,7 +52,7 @@ defmodule QuizSystemWeb.OptionController do
         |> redirect(to: Routes.question_option_path(conn, :show, question_id, option))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", option: option, changeset: changeset)
+        render(conn, "edit.html", option: option, changeset: changeset, question_id: question_id)
     end
   end
 
