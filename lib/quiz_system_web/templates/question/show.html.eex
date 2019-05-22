@@ -4,9 +4,15 @@
 
   <li>
     <strong>Question:</strong>
-    <%= @question.question %>
+    <div class="container">
+      <h1>
+      <%= @question.question %>
+      </h1>
+    </div>
   </li>
-    <%= link "Create Options", to: Routes.question_option_path(@conn, :new,@question.id) %>
+    <%= link "Show_answer_options", to: Routes.question_option_path(@conn, :index,@question.id) %>
+    <br>
+    <%= link "Create_answer_options", to: Routes.question_option_path(@conn, :new,@question.id) %>
   <span>
   
   </span>

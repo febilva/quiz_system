@@ -1,0 +1,25 @@
+<h1>Show Question</h1>
+
+<ul>
+
+  <li>
+    <strong>Question:</strong>
+    <div class="container">
+      <h1>
+      <%= @question.question %>
+      </h1>
+      
+      <%= render "answer_form.html", Map.put(assigns, :action, Routes.question_path(@conn, :check_answer)) %>
+    </div>
+  </li>
+    <%#= link "Show_answer_options", to: Routes.question_option_path(@conn, :index,@question.id) %>
+    <br>
+    <%#= link "Create_answer_options", to: Routes.question_option_path(@conn, :new,@question.id) %>
+  <span>
+  
+  </span>
+
+</ul>
+
+<span><%#= link "Edit", to: Routes.question_path(@conn, :edit, @question) %></span>
+<span><%= link "Back", to: Routes.question_path(@conn, :index) %></span>
