@@ -17,6 +17,7 @@
         <%= link "Show", to: Routes.question_path(@conn, :show, question) %>
         <%= link "Edit", to: Routes.question_path(@conn, :edit, question) %>
         <%= link "Delete", to: Routes.question_path(@conn, :delete, question), method: :delete, data: [confirm: "Are you sure?"] %>
+        <%= link "PLAY", to: Routes.question_path(@conn, :quiz, question)%>
       </td>
     </tr>
 <% end %>

@@ -4,7 +4,7 @@ defmodule QuizSystem.Quiz.Question do
 
   schema "questions" do
     field :question, :string
-    has_many :options, QuizSystem.Quiz.Option
+    has_many :options, QuizSystem.Quiz.Option, on_delete: :delete_all
 
     timestamps()
   end
