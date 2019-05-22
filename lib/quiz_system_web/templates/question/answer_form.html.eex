@@ -1,0 +1,15 @@
+
+
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+      <%= label f, "choose option"%>
+      <%= select f, :option_id, @select_options%>
+      <%= hidden_input :question, :question_id, value: @question.id %> 
+    <button class="button button-outline">submit</button>
+  </div>
+<% end %>

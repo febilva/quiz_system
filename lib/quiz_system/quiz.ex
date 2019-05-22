@@ -35,7 +35,7 @@ defmodule QuizSystem.Quiz do
       ** (Ecto.NoResultsError)
 
   """
-  def get_question!(id), do: Repo.get!(Question, id)
+  def get_question!(id), do: Repo.get!(Question, id) |> Repo.preload(:options)
 
   @doc """
   Creates a question.
@@ -100,6 +100,29 @@ defmodule QuizSystem.Quiz do
   """
   def change_question(%Question{} = question) do
     Question.changeset(question, %{})
+  end
+
+  require IEx
+
+  def select_options(question_id) do
+    query =
+      from q in Question,
+        where: q.id == ^question_id,
+        join: optn in assoc(q, :options),
+        select: {optn.option, optn.id}
+
+    Repo.all(query)
+  end
+
+  def get_currect_answer(question_id) do
+    query =
+      from questn in Question,
+        where: questn.id == ^question_id,
+        join: optn in assoc(questn, :options),
+        where: optn.is_asnwer == true,
+        select: optn
+
+    Repo.one(query)
   end
 
   alias QuizSystem.Quiz.Option

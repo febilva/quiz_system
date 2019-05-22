@@ -3,6 +3,7 @@ defmodule QuizSystemWeb.QuestionController do
 
   alias QuizSystem.Quiz
   alias QuizSystem.Quiz.Question
+  alias QuizSystem.Quiz.Option
 
   def index(conn, _params) do
     questions = Quiz.list_questions()
@@ -23,6 +24,37 @@ defmodule QuizSystemWeb.QuestionController do
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
+    end
+  end
+
+  # def quiz()
+  def quiz(conn, %{"id" => id}) do
+    question = Quiz.get_question!(id)
+    select_options = Quiz.select_options(id)
+    changeset = Quiz.change_question(%Question{})
+
+    render(conn, "quiz.html",
+      question: question,
+      changeset: changeset,
+      select_options: select_options
+    )
+  end
+
+  def check_answer(conn, %{
+        "question" => %{"question_id" => question_id, "option_id" => option_id}
+      }) do
+    opt_id = option_id |> String.to_integer()
+
+    case Quiz.get_currect_answer(question_id) do
+      %QuizSystem.Quiz.Option{id: ^opt_id} ->
+        conn
+        |> put_flash(:info, "your answer is correct")
+        |> redirect(to: Routes.question_path(conn, :quiz, question_id))
+
+      _ ->
+        conn
+        |> put_flash(:info, "answer is incorrect")
+        |> redirect(to: Routes.question_path(conn, :quiz, question_id))
     end
   end
 
