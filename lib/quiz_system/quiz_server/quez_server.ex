@@ -3,17 +3,17 @@ defmodule QuizSystem.QuizServer do
   alias QuizSystem.Quiz
 
   # Client
-
+  # initilizing all questions with right option id from the database to genserver state
   def start_link(default) when is_list(default) do
-    GenServer.start_link(__MODULE__, get_all_questions(), name: __MODULE__)
+    GenServer.start_link(__MODULE__, get_questions_with_right_option(), name: __MODULE__)
   end
 
-  def get_all_questions() do
+  def get_questions_with_right_option() do
     Quiz.question_and_answer_ids() |> Enum.into(%{})
   end
 
-  def check_answer(key) do
-    GenServer.call(__MODULE__, {:key, key})
+  def get_right_option(question_id) do
+    GenServer.call(__MODULE__, {:question, question_id})
   end
 
   # def push(item) do
@@ -32,9 +32,9 @@ defmodule QuizSystem.QuizServer do
   end
 
   @impl true
-  def handle_call({:key, key}, _from, state) do
-    answer = Map.get(state, key)
-    {:reply, answer, state}
+  def handle_call({:question, id}, _from, state) do
+    right_option = Map.get(state, id)
+    {:reply, right_option, state}
   end
 
   # @impl true
