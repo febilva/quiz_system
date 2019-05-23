@@ -5,6 +5,8 @@ defmodule QuizSystemWeb.QuestionController do
   alias QuizSystem.Quiz.Question
   alias QuizSystem.Quiz.Option
 
+  require IEx
+
   def index(conn, _params) do
     questions = Quiz.list_questions()
     render(conn, "index.html", questions: questions)
@@ -40,12 +42,31 @@ defmodule QuizSystemWeb.QuestionController do
     )
   end
 
-  def check_answer(conn, %{
+  def verify_option_from_genserver_state(conn, %{
+        "question" => %{"question_id" => q_id, "option_id" => opt_id}
+      }) do
+    question_id = q_id |> String.to_integer()
+    option_id = opt_id |> String.to_integer()
+
+    case QuizSystem.QuizServer.get_right_option(question_id) do
+      ^option_id ->
+        conn
+        |> put_flash(:info, "your answer is correct")
+        |> redirect(to: Routes.question_path(conn, :quiz, question_id))
+
+      _ ->
+        conn
+        |> put_flash(:info, "answer is incorrect")
+        |> redirect(to: Routes.question_path(conn, :quiz, question_id))
+    end
+  end
+
+  def verify_option_from_database(conn, %{
         "question" => %{"question_id" => question_id, "option_id" => option_id}
       }) do
     opt_id = option_id |> String.to_integer()
 
-    case Quiz.get_currect_answer(question_id) do
+    case Quiz.get_right_option(question_id) do
       %QuizSystem.Quiz.Option{id: ^opt_id} ->
         conn
         |> put_flash(:info, "your answer is correct")

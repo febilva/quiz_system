@@ -114,7 +114,7 @@ defmodule QuizSystem.Quiz do
     Repo.all(query)
   end
 
-  def get_currect_answer(question_id) do
+  def get_right_option(question_id) do
     query =
       from questn in Question,
         where: questn.id == ^question_id,
@@ -123,6 +123,19 @@ defmodule QuizSystem.Quiz do
         select: optn
 
     Repo.one(query)
+  end
+
+  # get all question and option id(this value has is_answer: true field) in the following format
+  # {"question_id" => "option_id"}
+  # ex: {17 => 37,18 => 39,19 => 41,20 => 43}
+  def question_and_answer_ids() do
+    query =
+      from questn in Question,
+        join: optn in assoc(questn, :options),
+        where: optn.is_asnwer == true,
+        select: {questn.id, optn.id}
+
+    Repo.all(query)
   end
 
   alias QuizSystem.Quiz.Option
