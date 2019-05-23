@@ -42,13 +42,13 @@ defmodule QuizSystemWeb.QuestionController do
     )
   end
 
-  def check_answer_gen_server_call(conn, %{
+  def verify_option_from_genserver_state(conn, %{
         "question" => %{"question_id" => q_id, "option_id" => opt_id}
       }) do
     question_id = q_id |> String.to_integer()
     option_id = opt_id |> String.to_integer()
 
-    case QuizSystem.QuizServer.check_answer(question_id) do
+    case QuizSystem.QuizServer.get_right_option(question_id) do
       ^option_id ->
         conn
         |> put_flash(:info, "your answer is correct")
@@ -61,12 +61,12 @@ defmodule QuizSystemWeb.QuestionController do
     end
   end
 
-  def check_answer(conn, %{
+  def verify_option_from_database(conn, %{
         "question" => %{"question_id" => question_id, "option_id" => option_id}
       }) do
     opt_id = option_id |> String.to_integer()
 
-    case Quiz.get_currect_answer(question_id) do
+    case Quiz.get_right_option(question_id) do
       %QuizSystem.Quiz.Option{id: ^opt_id} ->
         conn
         |> put_flash(:info, "your answer is correct")
