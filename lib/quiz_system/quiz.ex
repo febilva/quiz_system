@@ -125,6 +125,16 @@ defmodule QuizSystem.Quiz do
     Repo.one(query)
   end
 
+  def question_and_answer_ids() do
+    query =
+      from questn in Question,
+        join: optn in assoc(questn, :options),
+        where: optn.is_asnwer == true,
+        select: {questn.id, optn.id}
+
+    Repo.all(query)
+  end
+
   alias QuizSystem.Quiz.Option
 
   @doc """

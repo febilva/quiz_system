@@ -11,9 +11,9 @@ defmodule QuizSystem.Application do
       # Start the Ecto repository
       QuizSystem.Repo,
       # Start the endpoint when the application starts
-      QuizSystemWeb.Endpoint
+      QuizSystemWeb.Endpoint,
       # Starts a worker by calling: QuizSystem.Worker.start_link(arg)
-      # {QuizSystem.Worker, arg},
+      {QuizSystem.QuizServer, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
