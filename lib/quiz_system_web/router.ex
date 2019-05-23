@@ -19,7 +19,7 @@ defmodule QuizSystemWeb.Router do
     get "/", PageController, :index
 
     get "/quiz/:id", QuestionController, :quiz
-    post "/check_answer", QuestionController, :check_answer
+    post "/check_answer", QuestionController, :check_answer_gen_server_call
 
     resources "/questions", QuestionController do
       resources "/options", OptionController
