@@ -7,10 +7,29 @@ To start your Phoenix server:
   * Install Node.js dependencies with `cd assets && npm install`
   * Start Phoenix endpoint with `mix phx.server`
   * seed your database for example questions `mix run priv/repo/seeds.exs`
+  
+Now you can visit [`localhost:4000/questions`](http://localhost:4000/questions) from your browser.
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+* Visit "/questions" for quiz questions
+* There are two ways to verify the option which user given 
+  * verify user submitted option from genserver state we get response in micro seconds 
+    <br>
+    <img src="state.png"
+     alt="Markdown Monster icon"
+     style="float: left; margin-right: 10px;" />
+  * verfiy user submitted option from database 
+    <img src="database.png"
+      alt="Markdown Monster icon"
+      style="float: left; margin-right: 10px;" />
+
+<!-- * initilizing a genserver called Quiz_Server with questions and option ids in the database with following format
+  * `[%{"question_id" => "right_option_id"]` -->
+
+
+
+
+<!-- Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
 ## Learn more
 
@@ -18,4 +37,4 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Guides: https://hexdocs.pm/phoenix/overview.html
   * Docs: https://hexdocs.pm/phoenix
   * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+  * Source: https://github.com/phoenixframework/phoenix -->
